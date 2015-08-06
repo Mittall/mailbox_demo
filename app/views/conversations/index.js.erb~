@@ -1,0 +1,1 @@
+$("#vertical-tab").html("<%= escape_javascript(render(:partial => params[:name])).html_safe%>");

@@ -1,0 +1,71 @@
+<%= form_for(:conversation, :url => conversations_path) do |f| %>
+
+
+  <div id="email_dropdown">
+    <% select("conversation","user_id",User.all.collect {|c| [c.email,c.id] } ,{:include_blank => '----- Select Category -------' }) %></p>
+  </div>
+
+  <div class="field", id="recipients_email">
+    <%= f.label :recipients %>
+    <%= f.text_field :recipients, :required => "true", :id => "recipients_data" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subject %>
+    <%= f.text_field :subject, :required => "true" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body %>
+    <%= f.text_field :body, :required => "true" %>
+  </div>
+
+  <div class="field">
+    <%= f.submit 'Save', :class => "button [tiny small large]"%>
+    <%= submit_tag 'Cancel', type: :reset, class: 'btn btn-danger', :class => "button [tiny small large]" %>
+  </div>
+
+
+<% end %>
+
+<!--
+<script>
+$(document).ready(function() {
+  $("#recipients_email").onClick(function(){
+    if(this.val() == $("#email_dropdown").val()){
+      $("#email_dropdown").show();
+    }else{
+      $("#email_dropdown").hide();  
+    }
+  });
+});
+</script>
+-->
+
+<!--<script type="text/javascript">
+    $(document).ready(function() {
+        $("#mytags").tagit({
+          availableTags: <%#= conversation.tag_counts.map(&:email).to_json.html_safe %> ,
+          singleField: true,
+          select:true,
+          singleFieldNode: $('#recipients_data')
+          });
+    });
+
+</script>
+-->
+
+<!--
+var arrProducts = [];
+
+$.each(products, function(index, product) {
+    var prod = {};
+    prod['value'] = product.title;
+    prod['url'] = product.url;
+    prod['label'] = product.label;
+
+    arrProducts.push(prod);
+});
+
+$('.searchBox').autocomplete({ source: arrProducts });
+-->

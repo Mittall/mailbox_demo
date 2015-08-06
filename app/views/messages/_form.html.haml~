@@ -1,0 +1,24 @@
+= simple_form_for :message, url: reply_conversation_path(conversation) do |f|
+  = f.input :subject
+  = f.input :body
+  .form-actions
+    = f.button :submit, class: 'btn-primary'
+    = submit_tag 'Cancel', type: :reset, class: 'btn btn-danger'
+
+<%= form_for(:message, :url => reply_conversation_path(conversation)) do |f| %>
+
+  <div class="field">
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_field :body %>
+  </div>
+
+  <div class="field">
+    <%= f.submit %><br>
+  </div>
+
+<% end %>

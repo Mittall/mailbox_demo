@@ -1,0 +1,18 @@
+<div id="row">
+  <ul class="small-2 columns">
+    <li><%= link_to "Compose", new_conversation_path %></li>
+    <li><%= link_to "Inbox", conversations_path(:name => "inbox"), :remote => true %>(<%= current_user.mailbox.inbox.count %>)</li>
+    <li><%= link_to "Sentbox", conversations_path(:name => "sentbox"), :remote => true %>(<%= current_user.mailbox.sentbox.count %>)</li>
+    <li><%= link_to "Trash", conversations_path(:name => "trash"), :remote => true %>(<%= current_user.mailbox.trash.count %>)</li>
+  </ul>
+</div>
+
+<div id="vertical-tab">
+  <%= render :partial => 'inbox' %>
+</div>
+
+
+
+
+
+

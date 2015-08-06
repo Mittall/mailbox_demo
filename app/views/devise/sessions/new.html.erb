@@ -1,0 +1,166 @@
+<div class="row">
+  <div class="small-8">
+    <div class="row">
+      <div class="small-3 columns">
+      </div>
+      <div class="small-9 columns">
+         <h3>Log In</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <% if resource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(resource.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% resource.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= devise_error_messages! %>
+
+  <div class="row">
+    <div class="small-8">
+      <div class="row">
+        <div class="small-3 columns">
+          <label for="right-label" class="right">Email <small>required</small></label>
+        </div>
+        <div class="small-9 columns">
+           <%= f.text_field :email, autofocus: true, :placeholder => "abc@example.com" %>
+           <!--<% if resource.errors.empty? %>
+              <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+           <% end %>-->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-8">
+      <div class="row">
+        <div class="small-3 columns">
+          <label for="right-label" class="right">Password <small>required</small></label>
+        </div>
+        <div class="small-9 columns">
+          <%= f.password_field :password, autocomplete: "off", :placeholder => "password" %>
+        </div>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="small-8">
+      <div class="row">
+        <div class="small-3 columns">
+        </div>
+        <div class="small-9 columns">
+          <% if devise_mapping.rememberable? -%>
+            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="small-8">
+      <div class="row">
+        <div class="small-3 columns">
+        </div>
+        <div class="small-9 columns">
+          <%= f.submit "Log in",  :class => "button [tiny small large]" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<div class="row">
+  <div class="small-8">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Autocomplete - Multiple values</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+
+    var availableTags = [];
+
+    $.each(users, function(index, user){
+      var data = {};
+      data['email'] = user.email;
+      
+      availableTags.push(data);
+    });
+    function split( val ) {
+      return val.split( /,\s*/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+ 
+    $( "#tags" )
+      // don't navigate away from the field on tab when selecting an item
+      .bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        minLength: 0,
+        source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+            availableTags, extractLast( request.term ) ) );
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+        }
+      });
+  });
+  </script>
+</head>
+<body>
+ 
+<div class="ui-widget">
+  <label for="tags">Tag programming languages: </label>
+  <input id="tags" size="50">
+</div>
+ 
+
+</body>
+</html>
+
+
+

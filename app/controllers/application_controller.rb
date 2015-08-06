@@ -1,0 +1,15 @@
+class ApplicationController < ActionController::Base
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+  before_action :get_email
+
+  def get_email
+    @o_all = User.all
+    email = []
+    @o_all.each do |u|
+      email << u.email
+    end
+  end
+
+end

@@ -1,0 +1,27 @@
+<div class="row">
+<h3>Inbox</h3>
+
+<% @conversations.each do |inbox| %>
+  <div class="small-10 columns">
+    <%= link_to  raw(truncate(strip_tags(inbox.subject), :length => 7)), conversation_path(inbox) %>   
+    <% if inbox.is_completely_trashed?(current_user) %> 
+      | <%= link_to "Untrash", {:controller => "conversations", :action => "untrash", :id => inbox.id}, :method => 'post' %>
+    <% else %>
+      | <%= link_to "Move to trash", {:controller => "conversations", :action => "trash", :id => inbox.id}, :method =>'post' %>
+    <% end %>
+  </div>
+<% end %> 
+<div class="row">
+  <div class="small-10 columns">
+    <br/>
+    <%= will_paginate @conversations, :previous_label => 'Previous', :next_label => 'Next', :params_name => "index" if @conversations %>
+  </div>
+</div>
+<hr>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+<div class="row">
+<h3>Trash</h3>
+<% @conversations.each do |trash| %>
+  <div class="small-10 columns">
+    <%= link_to trash.subject, conversation_path(trash) %>
+    <% if trash.is_completely_trashed?(current_user) %>
+      | <%= link_to "Untrash", {:controller => "conversations", :action => "untrash", :id => trash.id}, :method => 'post' %>
+    <% else %>
+      | <%= link_to "Move to trash", {:controller => "conversations", :action => "trash", :id => trash.id}, :method =>'post' %>
+    <% end %>
+  </div>
+<% end %> 
+<hr>
+</div>
+
